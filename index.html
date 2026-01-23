@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Student Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="orb-container">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
+    </div>
+
+    <div class="dashboard-container">
+        
+        <!-- SIDEBAR (Filled by JS) -->
+        <nav class="glass-panel sidebar" id="sidebar-container"></nav>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            
+            <!-- Top Bar -->
+            <div class="glass-panel top-bar">
+                <div style="color: var(--text-dim); font-size: 0.9rem;">
+                    <!-- Removed current_term as requested -->
+                </div>
+                <div class="profile">
+                    <div style="text-align: right;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">Sarah Karlis</div>
+                        <div style="font-size: 0.75rem; color: var(--text-dim);">Professor of English</div>
+                    </div>
+                    <div class="avatar">K</div>
+                </div>
+            </div>
+
+            <!-- Hero Text -->
+            <div class="hero-section">
+                <h2>Welcome to the Hub.</h2>
+                <p>Select your class below or browse the toolkit.</p>
+            </div>
+
+            <!-- Classes Grid -->
+            <div class="classes-grid">
+                
+                <a href="https://1170.skarlis.org" class="glass-panel class-card c-1">
+                    <div class="card-inner">
+                        <div class="class-icon ci-1"><i class="ph ph-book-open-text"></i></div>
+                        <div class="class-code">ENGL 1170</div>
+                        <div class="class-link-text">Go to Class Site <i class="ph ph-arrow-right"></i></div>
+                    </div>
+                </a>
+
+                <a href="https://1181.skarlis.org" class="glass-panel class-card c-2">
+                    <div class="card-inner">
+                        <div class="class-icon ci-2"><i class="ph ph-pen-nib"></i></div>
+                        <div class="class-code">ENGL 1181</div>
+                        <div class="class-link-text">Go to Class Site <i class="ph ph-arrow-right"></i></div>
+                    </div>
+                </a>
+
+                <a href="https://1190.skarlis.org" class="glass-panel class-card c-3">
+                    <div class="card-inner">
+                        <div class="class-icon ci-3"><i class="ph ph-article"></i></div>
+                        <div class="class-code">ENGL 1190</div>
+                        <div class="class-link-text">Go to Class Site <i class="ph ph-arrow-right"></i></div>
+                    </div>
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="nav.js"></script>
+</body>
+</html>

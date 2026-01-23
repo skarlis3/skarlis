@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Grammar Resources | Prof. Karlis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="orb-container">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
+    </div>
+
+    <div class="dashboard-container">
+        
+        <!-- SIDEBAR (Filled by JS) -->
+        <nav class="glass-panel sidebar" id="sidebar-container"></nav>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            
+            <!-- Top Bar -->
+            <div class="glass-panel top-bar">
+                <div style="color: var(--text-dim); font-size: 0.9rem;">
+                    Toolkit > <strong>Grammar Resources</strong>
+                </div>
+                <div class="profile">
+                    <div style="text-align: right;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">Sarah Karlis</div>
+                        <div style="font-size: 0.75rem; color: var(--text-dim);">Instructor</div>
+                    </div>
+                    <div class="avatar">K</div>
+                </div>
+            </div>
+
+            <!-- READING PANEL -->
+            <div class="glass-panel reading-panel">
+                <h1>Grammar & Style Toolkit</h1>
+                
+                <p>Grammar isn't just about following rules; it's about clarity. In First-Year Writing, we focus less on "policing" language and more on ensuring your ideas aren't obstructed by mechanical roadblocks.</p>
+
+                <h2>1. The "Big Three" Common Errors</h2>
+                <p>If you master these three concepts, you will solve 90% of the sentence-level issues in your college papers.</p>
+                
+                <div class="callout-box">
+                    <strong>1. The Fragment</strong><br>
+                    An incomplete sentence that lacks a subject, a verb, or a complete thought.<br><br>
+                    <em>The Error:</em> "Because I drank four Red Bulls."<br>
+                    <em>The Fix:</em> "I can see sounds <strong>because</strong> I drank four Red Bulls." (Connected to a main clause).
+                </div>
+
+                <div class="callout-box">
+                    <strong>2. The Run-on</strong><br>
+                    Two independent sentences smushed together without punctuation.<br><br>
+                    <em>The Error:</em> "I wrote this at 3 AM the printer is broken."<br>
+                    <em>The Fix:</em> "I wrote this at 3 AM<strong>. The</strong> printer is broken." (Separated by a period).
+                </div>
+
+                <div class="callout-box">
+                    <strong>3. The Comma Splice</strong><br>
+                    Two independent sentences joined <em>only</em> by a comma (the most common college error!).<br><br>
+                    <em>The Error:</em> "The market only has stale pretzels, I am going to starve."<br>
+                    <em>The Fix:</em> "The market only has stale pretzels, <strong>so</strong> I am going to starve." (Added a conjunction).
+                </div>
+
+                <h2>2. Trusted External Resources</h2>
+                <p>Don't rely on random Google searches. These are the gold-standard resources for college-level writing.</p>
+
+                <ul>
+                    <li><strong><a href="https://www.khanacademy.org/humanities/grammar" target="_blank" style="text-decoration: underline; color: #00c6fb;">Khan Academy Grammar</a></strong><br>
+                    A comprehensive, free course that breaks down everything from parts of speech to complex syntax. Great for visual learners.</li>
+                    
+                    <li style="margin-top: 1rem;"><strong><a href="https://writingcenter.unc.edu/tips-and-tools/" target="_blank" style="text-decoration: underline; color: #00c6fb;">UNC Chapel Hill Writing Center</a></strong><br>
+                    Their "Tips & Tools" section is excellent. They offer short, readable handouts on specific issues like "Passive Voice" or "Flow."</li>
+                </ul>
+
+                <h2>3. GenAI & Your Writing Voice</h2>
+                <p>Generative AI (like ChatGPT) can be a useful tool, but it can also flatten your writing style. You need to <strong>constrain</strong> the AI so it doesn't delete your personality.</p>
+
+                <div class="callout-box">
+                    <strong>1. Draft First, AI Second</strong><br>
+                    Never start with a blank page and an AI prompt. Write your messy first draft yourself. Only use AI to critique what you have already written.
+                </div>
+
+                <div class="callout-box">
+                    <strong>2. Constrain the AI (The "Hands Off" Prompt)</strong><br>
+                    If you ask AI to "fix this," it will rewrite your entire paragraph to sound like a robot. Instead, give it strict boundaries:<br><br>
+                    <em>"Please proofread the following paragraph for grammar errors only. List the errors you find, but <strong>DO NOT rewrite the paragraph</strong> or change my tone. I want to make the changes myself."</em>
+                </div>
+
+                <div class="callout-box">
+                    <strong>3. The "Read Aloud" Test</strong><br>
+                    After you make edits, read your paper out loud. If you stumble over a word or if a sentence sounds too fancy for your normal speaking voice, the AI probably inserted it. Cut it out. Your professor wants to hear <em>your</em> voice, not a machine's.
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="nav.js"></script>
+</body>
+</html>

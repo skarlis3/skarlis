@@ -1,0 +1,350 @@
+:root {
+    /* Core Palette */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-highlight: rgba(255, 255, 255, 0.3);
+    --text-white: rgba(255, 255, 255, 0.95);
+    --text-dim: rgba(255, 255, 255, 0.6);
+    
+    /* Gradients */
+    --accent-grad: linear-gradient(135deg, #7000ff 0%, #00c6fb 100%);
+    --class-1: linear-gradient(135deg, #FF0080 0%, #7928CA 100%);
+    --class-2: linear-gradient(135deg, #FF4D4D 0%, #F9CB28 100%);
+    --class-3: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+    --class-4: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);
+}
+
+
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #0f0f11;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-white);
+    display: flex;
+    justify-content: center;
+    /* Allow scrolling on body for content pages */
+    overflow-x: hidden; 
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* === BACKGROUND ORBS === */
+.orb-container {
+    position: fixed; /* Fixed so they don't scroll away */
+    width: 100%; height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: float 12s infinite ease-in-out alternate;
+}
+
+.o1 { width: 500px; height: 500px; background: #4a00e0; top: -150px; left: -100px; }
+.o2 { width: 300px; height: 300px; background: #8e2de2; bottom: -50px; right: -50px; animation-delay: -5s; }
+.o3 { width: 150px; height: 150px; background: #00c6fb; top: 30%; left: 40%; animation-duration: 18s; opacity: 0.3; }
+
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 60px); }
+}
+
+/* === SHARED GLASS COMPONENTS === */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-highlight);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+a.glass-panel:hover { 
+    transform: translateY(-4px); 
+    background: rgba(255, 255, 255, 0.08); 
+    border-color: rgba(255, 255, 255, 0.25); 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+/* === LAYOUT GRID === */
+.dashboard-container {
+    position: relative;
+    z-index: 10;
+    width: 1200px;
+    min-height: 80vh;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+    padding: 40px 20px;
+}
+
+/* === SIDEBAR (Injected via JS) === */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 80px); /* Sticky height */
+    position: sticky;
+    top: 40px;
+}
+
+.logo {
+    font-size: 1.4rem; font-weight: 700; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; letter-spacing: 0.5px;
+}
+.logo i { font-size: 1.8rem; background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.nav-link {
+    display: flex; align-items: center; gap: 12px; padding: 12px 14px; margin-bottom: 6px; border-radius: 12px; color: var(--text-dim); text-decoration: none; transition: 0.2s; font-weight: 500; font-size: 0.95rem;
+}
+.nav-link:hover, .nav-link.active { background: rgba(255, 255, 255, 0.1); color: white; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+
+.office-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+    border-radius: 16px; padding: 20px; text-align: left; border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden; margin-top: auto;
+}
+.office-card::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.2), transparent 60%); animation: rotate 20s linear infinite; z-index: 0; }
+.office-content { position: relative; z-index: 1; }
+.office-card h4 { margin: 0 0 5px 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+.office-card p { font-size: 0.85rem; color: var(--text-dim); margin: 0; line-height: 1.4; }
+
+/* === MAIN CONTENT AREA === */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.top-bar {
+    display: flex; justify-content: space-between; align-items: center; padding: 16px 24px;
+}
+
+.profile { display: flex; align-items: center; gap: 12px; }
+.avatar { width: 36px; height: 36px; border-radius: 12px; background: var(--accent-grad); display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid rgba(255,255,255,0.2); }
+
+.hero-section h2 { margin: 0 0 5px 0; font-size: 2rem; }
+.hero-section p { margin: 0; color: var(--text-dim); font-size: 1.1rem; }
+
+/* === CLASSES GRID === */
+.classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.class-card {
+    position: relative; overflow: hidden; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px;
+}
+.class-card::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; animation: rotate 15s linear infinite; z-index: 0; opacity: 0.2; }
+
+.c-1::before { background: radial-gradient(circle at 50% 50%, #FF0080, transparent 60%); }
+.c-2::before { background: radial-gradient(circle at 50% 50%, #FF4D4D, transparent 60%); }
+.c-3::before { background: radial-gradient(circle at 50% 50%, #00c6fb, transparent 60%); }
+.c-4::before { background: radial-gradient(circle at 50% 50%, #42e695, transparent 60%); }
+
+.card-inner { position: relative; z-index: 1; }
+.class-icon { width: 45px; height: 45px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; margin-bottom: 15px; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+.ci-1 { background: var(--class-1); }
+.ci-2 { background: var(--class-2); }
+.ci-3 { background: var(--class-3); }
+.ci-4 { background: var(--class-4); }
+
+.class-code { font-size: 1.8rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
+.class-link-text { font-size: 0.9rem; color: var(--text-dim); display: flex; align-items: center; gap: 5px; }
+
+/* === CONTENT PAGE LAYOUT (Reading) === */
+.reading-panel {
+    background: rgba(20, 20, 25, 0.6); /* Slightly darker for readability */
+    backdrop-filter: blur(40px);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    max-width: 900px;
+}
+
+.reading-panel h1 { font-size: 2.5rem; margin-bottom: 10px; background: linear-gradient(to right, white, rgba(255,255,255,0.5)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.reading-panel h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; color: #00c6fb; display: flex; align-items: center; gap: 10px; }
+.reading-panel h2::before { content: ""; width: 6px; height: 24px; background: #00c6fb; border-radius: 4px; display: block; }
+
+.reading-panel p, .reading-panel ul { color: rgba(255,255,255,0.85); margin-bottom: 1.5rem; }
+.reading-panel strong { color: white; }
+
+/* Callout Box for Content Pages */
+.callout-box {
+    background: rgba(255,255,255,0.05);
+    border-left: 4px solid #7000ff;
+    padding: 20px;
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+}
+
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Mobile */
+@media (max-width: 900px) {
+    .dashboard-container { grid-template-columns: 1fr; width: 100%; padding: 10px; }
+    .sidebar { display: none; } /* In real implementation, you'd want a hamburger menu */
+    .classes-grid { grid-template-columns: 1fr; }
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Freewriting Prompts | Prof. Karlis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* INTERNAL STYLES FOR THE PROMPT BLOCKS */
+        /* You can move this to your style.css if you prefer */
+        
+        .prompt-box {
+            background: rgba(0, 0, 0, 0.4); /* Darker background than glass */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 4px solid #00c6fb; /* Cyan accent for prompts */
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace; /* Code font */
+            font-size: 0.95rem;
+            color: #e0e0e0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .prompt-box:hover {
+            border-left-color: #7000ff; /* Changes color on hover */
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .prompt-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 1.1rem;
+        }
+        
+        /* Small label to indicate it's copyable */
+        .prompt-box::after {
+            content: "COPY";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            opacity: 0.3;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb-container">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
+    </div>
+
+    <div class="dashboard-container">
+        
+        <nav class="glass-panel sidebar" id="sidebar-container"></nav>
+
+        <div class="main-content">
+            
+            <div class="glass-panel top-bar">
+                <div style="color: var(--text-dim); font-size: 0.9rem;">
+                    Toolkit > <strong>Freewriting Prompts</strong>
+                </div>
+                <div class="profile">
+                    <div class="avatar">PK</div>
+                </div>
+            </div>
+
+            <div class="glass-panel reading-panel">
+                <h1>Freewriting Prompts</h1>
+                <p>A collection of prompts for our daily 10-minute warm-ups. These are designed to get the gears turning, clear the static, and bridge the gap between thinking and writing.</p>
+                
+                <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.1); margin: 30px 0;">
+
+                <h2>1. The Base Prompt (Open-Ended)</h2>
+                <p>Use this when we need to just clear our heads.</p>
+                
+                <div class="prompt-box">
+                    <span class="prompt-title">The Brain Dump</span>
+                    Write about whatever is in your head right now—stress, lunch plans, traffic, or your to-do list. If you get stuck, write "I don't know what to write" until a new thought comes. The only rule is: don't stop moving your hand/fingers.
+                </div>
+
+                <h2>2. Writer Identity</h2>
+                <p>Prompts to explore how we see ourselves as students and writers.</p>
+
+                <div class="prompt-box">
+                    <span class="prompt-title">The "Good Writer" Myth</span>
+                    Describe your definition of a "good writer." Do they use big words? Do they write fast? Do you fit that description? Why or why not?
+                </div>
+
+                <div class="prompt-box">
+                    <span class="prompt-title">The Memory</span>
+                    Describe one specific memory you have about writing in school (positive or negative). How does that memory affect how you feel when you sit down to write today?
+                </div>
+
+                <div class="prompt-box">
+                    <span class="prompt-title">Honest Assessment</span>
+                    Finish this sentence and keep writing: "If I were being honest about how I feel about writing/this class, I would say..."
+                </div>
+
+                <h2>3. GenAI & Technology</h2>
+                <p>Critical thinking about the intersection of humanity and automation.</p>
+
+                <div class="prompt-box">
+                    <span class="prompt-title">The AI Apology</span>
+                    If a friend sent you a heartfelt apology letter but you found out they used AI to write it, would it still count? Why or why not? Does the origin matter if the words are perfect?
+                </div>
+
+                <div class="prompt-box">
+                    <span class="prompt-title">The Human Role</span>
+                    If AI eventually does 90% of the writing in the world, what is left for humans to do? Is there any value in a messy, human first draft?
+                </div>
+
+                <div class="prompt-box">
+                    <span class="prompt-title">Analog vs. Digital</span>
+                    Compare how your brain works when typing on a phone versus writing by hand on paper. Do you think differently depending on the tool? Which makes it easier to be honest?
+                </div>
+
+                <h2>4. Communication</h2>
+                <p>Thinking about audience, tone, and clarity.</p>
+
+                <div class="prompt-box">
+                    <span class="prompt-title">Code Switching</span>
+                    Write a few sentences describing your weekend to your best friend. Now, describe the same weekend to a strict boss. What specifically changed in your vocabulary or tone?
+                </div>
+
+                <div class="prompt-box">
+                    <span class="prompt-title">The Misunderstanding</span>
+                    Write about a time a text or email you sent was misunderstood. What specifically went wrong (tone, word choice, lack of context)?
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="nav.js"></script>
+</body>
+</html>
+}

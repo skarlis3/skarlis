@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404 // Resource Not Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050505; /* Slightly softer black */
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* CANVAS CONTAINER */
+        #canvas-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0.6; /* Dimmed slightly so text pops more */
+        }
+
+        /* CONTENT OVERLAY */
+        .content-overlay {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            pointer-events: none;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 8rem; /* Slightly smaller than before for readability */
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: -5px; /* Tighter tracking */
+            color: #fff;
+            text-shadow: 0 0 40px rgba(255,255,255,0.3);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #4facfe; /* Academic Blue */
+            text-transform: uppercase;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #bdc3c7;
+            margin: 0 auto 40px auto;
+            max-width: 550px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* BUTTON */
+        .hub-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background: #4facfe;
+            border: none;
+            border-radius: 50px; /* Rounder, friendlier shape */
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            pointer-events: auto;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .hub-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.5);
+            background: #00f2fe;
+        }
+
+        .status-line {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            font-family: monospace;
+            color: rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div class="content-overlay">
+        <h1>404</h1>
+        <h2>Off the Syllabus</h2>
+        <p>
+            You’ve wandered into a digital void. The resource you are looking for might have been moved, deleted, or never existed in the curriculum to begin with.
+        </p>
+        <a href="index.html" class="hub-btn">Return to Student Hub</a>
+    </div>
+
+    <div class="status-line">
+        Grade Status: UNAFFECTED // Caffeine Level: LOW // GPA: SECURE
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <script>
+        // === 3D PARTICLE SYSTEM (Re-purposed as "Abstract Data Stream") ===
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        
+        // Camera
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 50;
+
+        // Renderer
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Particles Geometry
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 1500; // Slightly fewer particles for a cleaner look
+        
+        const posArray = new Float32Array(particlesCount * 3);
+        
+        for(let i = 0; i < particlesCount * 3; i+=3) {
+            // Random spread but keeping the spiral shape as it looks nice
+            const r = 35 * Math.sqrt(Math.random()); 
+            const theta = Math.random() * 2 * Math.PI; 
+            
+            const spiral = 2 * Math.PI * r / 60; 
+
+            posArray[i] = r * Math.cos(theta + spiral); 
+            posArray[i+1] = r * Math.sin(theta + spiral); 
+            posArray[i+2] = (Math.random() - 0.5) * 10; // More depth on Z axis
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        // Particles Material - Changed to a clean academic blue
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.25,
+            color: 0x4facfe, 
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
+        });
+
+        // Mesh
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Removed the "Black Hole" sphere to make it look more like scattered data
+        // Kept the ring but made it subtle
+        const ringGeo = new THREE.TorusGeometry(5, 0.05, 16, 100);
+        const ringMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.1 });
+        const dataRing = new THREE.Mesh(ringGeo, ringMat);
+        scene.add(dataRing);
+
+
+        // Mouse Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - window.innerWidth / 2) * 0.05;
+            mouseY = (event.clientY - window.innerHeight / 2) * 0.05;
+        });
+
+        // Animation Loop
+        const clock = new THREE.Clock();
+
+        function animate() {
+            const elapsedTime = clock.getElapsedTime();
+
+            // Slower, calmer rotation
+            particlesMesh.rotation.z = elapsedTime * 0.05;
+            dataRing.rotation.x = Math.sin(elapsedTime * 0.2) * 0.2;
+            dataRing.rotation.y = Math.cos(elapsedTime * 0.2) * 0.2;
+
+            // Smooth Mouse Movement
+            targetX = mouseX * 0.2; // Reduced sensitivity
+            targetY = mouseY * 0.2;
+
+            particlesMesh.rotation.y += 0.05 * (targetX - particlesMesh.rotation.y);
+            particlesMesh.rotation.x += 0.05 * (targetY - particlesMesh.rotation.x);
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>

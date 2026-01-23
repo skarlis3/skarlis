@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Using GenAI | Prof. Karlis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Adding Fira Code for the "code look" in prompts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific override for code-like prompts */
+        .code-prompt {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0 25px 0;
+            color: #00ff88; /* Terminal Green text */
+            position: relative;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        /* Terminal header decoration */
+        .code-prompt::before {
+            content: "PROMPT_INPUT >";
+            display: block;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb-container">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
+    </div>
+
+    <div class="dashboard-container">
+        
+        <!-- SIDEBAR (Filled by JS) -->
+        <nav class="glass-panel sidebar" id="sidebar-container"></nav>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            
+            <!-- Top Bar -->
+            <div class="glass-panel top-bar">
+                <div style="color: var(--text-dim); font-size: 0.9rem;">
+                    Toolkit > <strong>Using GenAI</strong>
+                </div>
+                <div class="profile">
+                    <div style="text-align: right;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">Sarah Karlis</div>
+                        <div style="font-size: 0.75rem; color: var(--text-dim);">Instructor</div>
+                    </div>
+                    <div class="avatar">K</div>
+                </div>
+            </div>
+
+            <!-- READING PANEL -->
+            <div class="glass-panel reading-panel">
+                <h1>Using GenAI Successfully</h1>
+                
+                <p>Generative AI (like ChatGPT, Claude, or Copilot) is a powerful tool, but it is not a replacement for your own brain. In this class, we use AI to <em>enhance</em> our thinking, not outsource it.</p>
+                
+                <div style="border: 1px dashed rgba(255,255,255,0.3); padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 2rem;">
+                    <strong>THE GOLDEN RULE:</strong><br>
+                    <strong>Always write a messy first draft yourself.</strong><br>
+                    AI cannot find your voice. Write the bad version, the messy version, the "I don't know what I'm saying yet" version. Only open the AI once you have your own words on the page.
+                </div>
+
+                <h2>1. Starting Out: Understanding & Brainstorming</h2>
+                <p>Before you write, you can use AI to make sure you understand the assignment or to help you "talk out" your initial ideas.</p>
+
+                <strong>The "Assignment Decoder" Prompt:</strong>
+                <div class="code-prompt">
+"I am pasting my assignment instructions below. Please read them and summarize the 3 most important goals for this paper. Then, ask me a question to help me brainstorm a topic that fits these requirements.<br><br>
+[PASTE ASSIGNMENT SHEET HERE]"
+                </div>
+
+                <div class="callout-box" style="border-left-color: #ff3366;">
+                    <strong>Check the Accuracy!</strong><br>
+                    AI can misread text. Always re-read the actual assignment sheet yourself to ensure the AI didn't miss a specific due date, word count, or formatting rule.
+                </div>
+                
+                <strong>The "Socratic Partner" Prompt (Talking it Out):</strong>
+                <div class="code-prompt">
+"I have a vague idea about [TOPIC], but I need to refine my thinking. Act as a curious listener. Ask me one question at a time to help me explain my perspective. Do not give me ideas or write for me; just ask questions that help me clarify my own thoughts."
+                </div>
+
+                <h2>2. Getting Unstuck</h2>
+                <p>Writer's block happens. If you know what you want to say but can't connect the dots, use this.</p>
+                
+                <strong>The "Connector" Prompt:</strong>
+                <div class="code-prompt">
+"I am trying to write about [Topic], but I'm stuck on how to connect [Point A] to [Point B]. Can you suggest three different ways these two ideas might relate to each other?"
+                </div>
+
+                <h2>3. Strengthening Your Analysis</h2>
+                <p>Once you have a draft, use AI to test the strength of your logic.</p>
+
+                <strong>The "Devil's Advocate" Prompt:</strong>
+                <div class="code-prompt">
+"I am arguing that [Your Claim]. Act as a skeptic. Ask me 3 hard questions about my interpretation to help me see what I might be missing. Do not give me the answers; just push me to dig deeper."
+                </div>
+
+                <h2>4. Reverse Outlining & Organization</h2>
+                <p>One of the best uses of AI is checking if your paper actually makes sense. A "Reverse Outline" helps you see the skeleton of what you wrote.</p>
+
+                <strong>The Reverse Outline Prompt:</strong>
+                <div class="code-prompt">
+"Please read my draft below. Summarize each paragraph into a single sentence. Then, tell me if the progression of ideas is logical. Does the order make sense? Where does the flow break down?"
+                </div>
+
+                <h2>5. Constrained Proofreading</h2>
+                <p>You can use AI to polish your grammar, but you must <strong>constrain</strong> it so it doesn't rewrite your essay into a robot voice.</p>
+
+                <strong>The Polishing Prompt:</strong>
+                <div class="code-prompt">
+"Please proofread the text below for grammar, punctuation, and sentence clarity. You may make changes to fix errors, but <strong>DO NOT change my tone, vocabulary, or main ideas.</strong> If you make a change, list what you did at the end so I can double-check it."
+                </div>
+
+                <h2>6. The "Red Line": What Not To Do</h2>
+                <p>There is a difference between using a tool and academic dishonesty. Here is where the line is drawn:</p>
+                <ul>
+                    <li><strong>Do Not: Paste a prompt and submit the output.</strong> I can tell. It sounds generic, bland, and often uses words you wouldn't use in conversation.</li>
+                    <li><strong>Do Not: Ask AI for sources/citations.</strong> AI hallucinates. It will invent books that don't exist and articles that were never written. Using fabricated sources is considered an academic integrity violation.</li>
+                    <li><strong>Do Not: Let it write the bulk of your text.</strong> Writing is thinking. If you let the machine write the sentences, you are robbing yourself of the opportunity to learn how to work through complex ideas.</li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="nav.js"></script>
+</body>
+</html>

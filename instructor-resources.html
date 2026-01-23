@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Using GenAI | Prof. Karlis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Adding Fira Code for the "code look" in prompts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific override for code-like prompts */
+        .code-prompt {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0 25px 0;
+            color: #00ff88; /* Terminal Green text */
+            position: relative;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        /* Terminal header decoration */
+        .code-prompt::before {
+            content: "PROMPT_INPUT >";
+            display: block;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb-container">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
+    </div>
+
+    <div class="dashboard-container">
+        
+        <!-- SIDEBAR (Filled by JS) -->
+        <nav class="glass-panel sidebar" id="sidebar-container"></nav>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            
+            <!-- Top Bar -->
+            <div class="glass-panel top-bar">
+                <div style="color: var(--text-dim); font-size: 0.9rem;">
+                    Toolkit > <strong>Using GenAI</strong>
+                </div>
+                <div class="profile">
+                    <div style="text-align: right;">
+                        <div style="font-weight: 300; font-size: 0.9rem;">Sarah Karlis</div>
+                        <div style="font-size: 0.75rem; color: var(--text-dim);">Instructor</div>
+                    </div>
+                    <div class="avatar">K</div>
+                </div>
+            </div>
+
+            <!-- READING PANEL -->
+            <div class="glass-panel reading-panel">
+                <h1>Instructor Resources</h1>
+                
+                <ul>
+                <li><a href="https://faculty-tools-podium.streamlit.app/">Daily Welcome Screen</a></li>
+                <li><a href= "https://faculty-tools-586.streamlit.app/">Faculty Tools</a></li>
+                </ul>
+                
+                
+
+
+         
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="nav.js"></script>
+</body>
+</html>

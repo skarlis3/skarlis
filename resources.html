@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Student Resources | Prof. Karlis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles for clickable resource cards */
+        .resource-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            position: relative; /* Needed for absolute positioning of the arrow */
+        }
+        
+        .resource-card-link .glass-panel {
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .resource-card-link:hover .glass-panel {
+            background: rgba(255, 255, 255, 0.15) !important;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Floating Arrow in Top Right Corner */
+        /* This removes it from the text flow so it won't cause spacing issues */
+        .resource-card-link::after {
+            content: "\2197"; /* North East Arrow */
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2rem;
+            color: #00c6fb;
+            opacity: 0;
+            transform: translate(-5px, 5px); /* Start slightly offset */
+            transition: all 0.3s ease;
+            z-index: 2; /* Ensure it sits on top */
+        }
+
+        .resource-card-link:hover::after {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb-container">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
+    </div>
+
+    <div class="dashboard-container">
+        
+        <!-- SIDEBAR (Filled by JS) -->
+        <nav class="glass-panel sidebar" id="sidebar-container"></nav>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            
+            <!-- Top Bar -->
+            <div class="glass-panel top-bar">
+                <div style="color: var(--text-dim); font-size: 0.9rem;">
+                    Toolkit > <strong>Student Resources</strong>
+                </div>
+                <div class="profile">
+                    <div style="text-align: right;">
+                        <div style="font-weight: 600; font-size: 0.9rem;">Sarah Karlis</div>
+                        <div style="font-size: 0.75rem; color: var(--text-dim);">Instructor</div>
+                    </div>
+                    <div class="avatar">K</div>
+                </div>
+            </div>
+
+            <!-- READING PANEL -->
+            <div class="glass-panel reading-panel">
+                <h1>Macomb Student Resources</h1>
+                
+                <p>Think of your student experience like the writing process. We often treat resources&mdash;like counseling, advising, or food pantries&mdash;as "Later Order Concerns" that we will get to eventually. But actually, these are your <strong>High Order Concerns (HOCs)</strong>.</p>
+                
+                <p>If the big stuff isn't working (like your mental health, your food security, or your degree plan), the "small stuff" (like tonight's reading) becomes impossible. Macomb has a department to help you handle the HOCs so you can focus on the rest. Here are the direct links.</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+
+                    <!-- Card 1 -->
+                    <a href="https://www.macomb.edu/student-resources/academic-success-center.html" target="_blank" class="resource-card-link">
+                        <div class="glass-panel" style="background: rgba(255,255,255,0.08);">
+                            <h3 style="margin-top: 0; font-size: 1.2rem; color: white;">Academic Success Center</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-dim);">Free tutoring, writing assistance, and placement testing.</p>
+                            <span style="color: #00c6fb; font-size: 0.8rem; font-weight: bold;">Visit Site</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 2 -->
+                    <a href="https://www.macomb.edu/student-resources/counseling-academic-advising.html" target="_blank" class="resource-card-link">
+                        <div class="glass-panel" style="background: rgba(255,255,255,0.08);">
+                            <h3 style="margin-top: 0; font-size: 1.2rem; color: white;">Counseling & Advising</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-dim);">Degree planning, transfer credits, and mental health support.</p>
+                            <span style="color: #00c6fb; font-size: 0.8rem; font-weight: bold;">Visit Site</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 3 -->
+                    <a href="https://www.macomb.edu/student-resources/library/index.html" target="_blank" class="resource-card-link">
+                        <div class="glass-panel" style="background: rgba(255,255,255,0.08);">
+                            <h3 style="margin-top: 0; font-size: 1.2rem; color: white;">The Library</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-dim);">Finding peer-reviewed sources, database access, and quiet study space.</p>
+                            <span style="color: #00c6fb; font-size: 0.8rem; font-weight: bold;">Visit Site</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 4 -->
+                    <a href="https://www.macomb.edu/student-resources/student-access-services.html" target="_blank" class="resource-card-link">
+                        <div class="glass-panel" style="background: rgba(255,255,255,0.08);">
+                            <h3 style="margin-top: 0; font-size: 1.2rem; color: white;">Student Access Services</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-dim);">Disability accommodations, accessibility tools, and advocacy.</p>
+                            <span style="color: #00c6fb; font-size: 0.8rem; font-weight: bold;">Visit Site</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 5 -->
+                    <a href="https://www.macomb.edu/student-resources/career-services/index.html" target="_blank" class="resource-card-link">
+                        <div class="glass-panel" style="background: rgba(255,255,255,0.08);">
+                            <h3 style="margin-top: 0; font-size: 1.2rem; color: white;">Career Services</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-dim);">Resume reviews, mock interviews, and finding internships.</p>
+                            <span style="color: #00c6fb; font-size: 0.8rem; font-weight: bold;">Visit Site</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 6 -->
+                    <a href="https://www.macomb.edu/student-resources/campus-community-care-team.html" target="_blank" class="resource-card-link">
+                        <div class="glass-panel" style="background: rgba(255,255,255,0.08);">
+                            <h3 style="margin-top: 0; font-size: 1.2rem; color: white;">Community Care Team</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-dim);">Personal crises, food insecurity, or safety concerns.</p>
+                            <span style="color: #00c6fb; font-size: 0.8rem; font-weight: bold;">Visit Site</span>
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="nav.js"></script>
+</body>
+</html>
