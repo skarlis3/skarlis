@@ -189,162 +189,144 @@ a.glass-panel:hover {
 
 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+/* === MOBILE MENU === */
+.mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-btn i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-nav-overlay.active {
+    opacity: 1;
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    z-index: 1001;
+    background: rgba(15, 15, 17, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--glass-border);
+    transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mobile-nav.active {
+    max-height: 100vh;
+}
+
+.mobile-nav-content {
+    padding: 80px 20px 30px 20px;
+}
+
+.mobile-nav .nav-link {
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    margin-bottom: 8px;
+}
+
+.mobile-nav .nav-group-label {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-left: 20px;
+}
+
+.mobile-nav .office-card {
+    margin-top: 20px;
+}
+
+.mobile-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+
+.mobile-close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-close-btn i {
+    font-size: 1.5rem;
+    color: white;
+}
+
 /* Mobile */
 @media (max-width: 900px) {
-    .dashboard-container { grid-template-columns: 1fr; width: 100%; padding: 10px; }
-    .sidebar { display: none; } /* In real implementation, you'd want a hamburger menu */
-    .classes-grid { grid-template-columns: 1fr; }
-    
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="dark">
-    <title>Freewriting Prompts | Prof. Karlis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="style.css">
-    
-    <style>
-        /* INTERNAL STYLES FOR THE PROMPT BLOCKS */
-        /* You can move this to your style.css if you prefer */
-        
-        .prompt-box {
-            background: rgba(0, 0, 0, 0.4); /* Darker background than glass */
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-left: 4px solid #00c6fb; /* Cyan accent for prompts */
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 30px;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace; /* Code font */
-            font-size: 0.95rem;
-            color: #e0e0e0;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .prompt-box:hover {
-            border-left-color: #7000ff; /* Changes color on hover */
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .prompt-title {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 8px;
-            display: block;
-            font-size: 1.1rem;
-        }
-        
-        /* Small label to indicate it's copyable */
-        .prompt-box::after {
-            content: "COPY";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.7rem;
-            opacity: 0.3;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="orb-container">
-        <div class="orb o1"></div>
-        <div class="orb o2"></div>
-        <div class="orb o3"></div>
-    </div>
-
-    <div class="dashboard-container">
-        
-        <nav class="glass-panel sidebar" id="sidebar-container"></nav>
-
-        <div class="main-content">
-            
-            <div class="glass-panel top-bar">
-                <div style="color: var(--text-dim); font-size: 0.9rem;">
-                    Toolkit > <strong>Freewriting Prompts</strong>
-                </div>
-                <div class="profile">
-                    <div class="avatar">PK</div>
-                </div>
-            </div>
-
-            <div class="glass-panel reading-panel">
-                <h1>Freewriting Prompts</h1>
-                <p>A collection of prompts for our daily 10-minute warm-ups. These are designed to get the gears turning, clear the static, and bridge the gap between thinking and writing.</p>
-                
-                <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.1); margin: 30px 0;">
-
-                <h2>1. The Base Prompt (Open-Ended)</h2>
-                <p>Use this when we need to just clear our heads.</p>
-                
-                <div class="prompt-box">
-                    <span class="prompt-title">The Brain Dump</span>
-                    Write about whatever is in your head right now—stress, lunch plans, traffic, or your to-do list. If you get stuck, write "I don't know what to write" until a new thought comes. The only rule is: don't stop moving your hand/fingers.
-                </div>
-
-                <h2>2. Writer Identity</h2>
-                <p>Prompts to explore how we see ourselves as students and writers.</p>
-
-                <div class="prompt-box">
-                    <span class="prompt-title">The "Good Writer" Myth</span>
-                    Describe your definition of a "good writer." Do they use big words? Do they write fast? Do you fit that description? Why or why not?
-                </div>
-
-                <div class="prompt-box">
-                    <span class="prompt-title">The Memory</span>
-                    Describe one specific memory you have about writing in school (positive or negative). How does that memory affect how you feel when you sit down to write today?
-                </div>
-
-                <div class="prompt-box">
-                    <span class="prompt-title">Honest Assessment</span>
-                    Finish this sentence and keep writing: "If I were being honest about how I feel about writing/this class, I would say..."
-                </div>
-
-                <h2>3. GenAI & Technology</h2>
-                <p>Critical thinking about the intersection of humanity and automation.</p>
-
-                <div class="prompt-box">
-                    <span class="prompt-title">The AI Apology</span>
-                    If a friend sent you a heartfelt apology letter but you found out they used AI to write it, would it still count? Why or why not? Does the origin matter if the words are perfect?
-                </div>
-
-                <div class="prompt-box">
-                    <span class="prompt-title">The Human Role</span>
-                    If AI eventually does 90% of the writing in the world, what is left for humans to do? Is there any value in a messy, human first draft?
-                </div>
-
-                <div class="prompt-box">
-                    <span class="prompt-title">Analog vs. Digital</span>
-                    Compare how your brain works when typing on a phone versus writing by hand on paper. Do you think differently depending on the tool? Which makes it easier to be honest?
-                </div>
-
-                <h2>4. Communication</h2>
-                <p>Thinking about audience, tone, and clarity.</p>
-
-                <div class="prompt-box">
-                    <span class="prompt-title">Code Switching</span>
-                    Write a few sentences describing your weekend to your best friend. Now, describe the same weekend to a strict boss. What specifically changed in your vocabulary or tone?
-                </div>
-
-                <div class="prompt-box">
-                    <span class="prompt-title">The Misunderstanding</span>
-                    Write about a time a text or email you sent was misunderstood. What specifically went wrong (tone, word choice, lack of context)?
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <script src="nav.js"></script>
-</body>
-</html>
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        width: 100%;
+        padding: 10px;
+        padding-top: 80px;
+    }
+    .sidebar {
+        display: none;
+    }
+    .classes-grid {
+        grid-template-columns: 1fr;
+    }
+    .mobile-menu-btn {
+        display: flex;
+    }
+    .mobile-nav-overlay {
+        display: block;
+    }
+    .top-bar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
 }
