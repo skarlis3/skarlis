@@ -430,6 +430,40 @@ a { color: var(--accent); }
   margin-left: 0.3em;
 }
 
+/* --- Button Grid (Index Page) --- */
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6em;
+  margin: 1em 0;
+}
+
+@media (max-width: 640px) {
+  .btn-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.btn {
+  display: block;
+  text-align: center;
+  padding: 0.7em 1em;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95em;
+  border-radius: 8px;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 2px 6px rgba(44,95,124,0.18);
+  color: #fff;
+}
+
 /* --- Footer --- */
 
 .footer-note {
