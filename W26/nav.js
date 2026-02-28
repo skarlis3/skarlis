@@ -14,6 +14,13 @@
     ? './'
     : './' + path.split('/').pop();
 
+  // Skip-to-content link
+  const skip = document.createElement('a');
+  skip.href = '#main-content';
+  skip.className = 'skip-link';
+  skip.textContent = 'Skip to main content';
+  document.body.insertBefore(skip, document.body.firstChild);
+
   const nav = document.createElement('nav');
   nav.className = 'site-nav';
   nav.setAttribute('aria-label', 'Site navigation');
@@ -28,19 +35,23 @@
   brand.textContent = 'ENGL 1181';
   inner.appendChild(brand);
 
+  // Nav links
+  const links = document.createElement('ul');
+  links.className = 'nav-links';
+  links.id = 'nav-links';
+
   // Mobile toggle
   const toggle = document.createElement('button');
   toggle.className = 'nav-toggle';
   toggle.setAttribute('aria-label', 'Toggle navigation');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-controls', 'nav-links');
   toggle.innerHTML = '&#9776;';
   toggle.addEventListener('click', function() {
-    links.classList.toggle('open');
+    var isOpen = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
   inner.appendChild(toggle);
-
-  // Nav links
-  const links = document.createElement('ul');
-  links.className = 'nav-links';
 
   navItems.forEach(function(item) {
     const li = document.createElement('li');
@@ -58,6 +69,6 @@
   inner.appendChild(links);
   nav.appendChild(inner);
 
-  // Insert at top of body
-  document.body.insertBefore(nav, document.body.firstChild);
+  // Insert after skip link
+  document.body.insertBefore(nav, skip.nextSibling);
 })();
