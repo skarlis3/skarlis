@@ -283,6 +283,13 @@ a { color: var(--accent); }
 
 .checklist-item label { flex: 1; }
 
+.checklist-note {
+  font-size: 0.82em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 0.4em;
+}
+
 /* --- Assignment Blocks --- */
 
 .assignment-row {
