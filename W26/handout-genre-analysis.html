@@ -115,12 +115,12 @@
   margin: 0 0 1em 0;
   font-family: 'Times New Roman', 'Georgia', serif;
   font-size: 0.92em;
-  line-height: 1.55;
+  line-height: 1.3;
   max-width: 6.5in;
 }
 
 .letter-container p {
-  margin-bottom: 0.7em;
+  margin-bottom: 0.9em;
 }
 
 .annotation-dot {
@@ -315,7 +315,7 @@
       <p><strong>Logos:</strong> an appeal to logic</p>
       <ul class="strategy-list">
         <li>Presenting statistics, data, or research findings as evidence</li>
-        <li>Walking the reader through a cause-and-effect chain</li>
+        <li>Showing how one event or idea leads logically to the next</li>
         <li>Using comparisons or analogies to make a complex argument easier to follow</li>
         <li>Structuring the argument in a clear, step-by-step progression where each point builds on the last</li>
       </ul>
@@ -344,15 +344,15 @@
 
   <p>Dear Ms. Carey: <button class="annotation-dot" data-popup="conventions" aria-label="View Conventions analysis">2</button></p>
 
-  <p>I'm writing to express my interest in the sales associate position at Wholesale Wine USA (listed on Crimson Careers), which I believe reports to you. <button class="annotation-dot" data-popup="organization" aria-label="View Organization analysis">3</button></p>
+  <p>I'm writing to express my interest in the sales associate position at Wholesale Wine USA (listed on Crimson Careers), which I believe reports to you. <button class="annotation-dot" data-popup="hedging" aria-label="View hedging analysis">3</button> <button class="annotation-dot" data-popup="organization" aria-label="View Organization analysis">4</button></p>
 
-  <p>Having worked in the industry for nearly eight years, I now have a deep love and appreciation for wine and cuisine. At Shay's Pub and Wine Bar, nothing made me happier than speaking with customers about the perfect wine to pair with their orders. The result was a 25% increase in sales and 30% increase in repeat customers.</p>
+  <p>Having worked in the industry for nearly eight years, <button class="annotation-dot" data-popup="ethos" aria-label="View ethos analysis">5</button> I now have a deep love and appreciation for wine and cuisine. At Shay's Pub and Wine Bar, nothing made me happier than speaking with customers about the perfect wine to pair with their orders. The result was a 25% increase in sales and 30% increase in repeat customers.</p>
 
-  <p>My experience at Aspen's award-winning Montagna allowed me to expand upon my knowledge of wine, locally inspired cuisine and the highest standards of service. Our weekly blind-tastings fueled my desire to further myself in this field, and I'm currently in the process of acquiring certification through both the Court of Master Sommeliers and the Wine Spirit &amp; Education Trust. <button class="annotation-dot" data-popup="appeals" aria-label="View Rhetorical Appeals analysis">4</button></p>
+  <p>My experience at Aspen's award-winning Montagna allowed me to expand upon my knowledge of wine, locally inspired cuisine and the highest standards of service. Our weekly blind-tastings fueled my desire to further myself in this field, and I'm currently in the process of acquiring certification through both the Court of Master Sommeliers and the Wine Spirit &amp; Education Trust. <button class="annotation-dot" data-popup="appeals" aria-label="View Rhetorical Appeals analysis">7</button></p>
 
   <p>I also just returned from France, where I worked on an organic vineyard in Beaujolais and was able to shadow the vigneron who ran the estate, the largest of its kind in the region. As Wholesale Wine USA begins to expand into international markets, I'm confident that my knowledge of the French wine industry can help contribute to your company's growth and success.</p>
 
-  <p>I've attached my resume and am readily available via phone or email. Please don't hesitate to reach out if you have any questions. Thank you for your consideration and I look forward to hearing back from you!</p>
+  <p>I've attached my resume and am readily available via phone or email. Please don't hesitate to reach out if you have any questions. Thank you for your consideration and I look forward to hearing back from you! <button class="annotation-dot" data-popup="tone" aria-label="View tone analysis">6</button></p>
 
   <p>Sincerely,<br>
   Georgina Santiago</p>
@@ -398,6 +398,18 @@ var popupData = {
   organization: {
     title: 'Organization',
     body: '<p>The first paragraph includes the job being applied for. The next paragraph includes more broad explanation of experience, and the next two go into specifics of experience that is relevant. The final paragraph includes contact information and a thank you.</p><p><span class="popup-label">Notice</span>The letter moves from general to specific: it opens by naming the job, then provides broad experience, then detailed evidence. This is a pattern you\u2019ll see across cover letters \u2014 the organization serves the purpose by front-loading the most important information.</p>'
+  },
+  hedging: {
+    title: 'Writing Style \u2014 Hedging',
+    body: '<p>The author is making sure to not overstate what they actually know. They are hedging the claim to ensure they are not inaccurate.</p><p><span class="popup-label">Notice</span>\u201cWhich I believe reports to you\u201d \u2014 rather than stating it as fact, the author uses \u201cI believe\u201d to soften the claim. This is a deliberate style choice: it shows the author has done their research while being careful not to assert something they aren\u2019t 100% sure about.</p>'
+  },
+  ethos: {
+    title: 'Writing Style \u2014 Appeal to Ethos',
+    body: '<p>Appeal to ethos: the author is establishing their experience in the field.</p><p><span class="popup-label">Notice</span>\u201cHaving worked in the industry for nearly eight years\u201d \u2014 this opening immediately establishes credibility. The author leads with their years of experience to build trust before getting into specifics.</p>'
+  },
+  tone: {
+    title: 'Writing Style \u2014 Tone',
+    body: '<p>The tone is formal overall, but this line is a bit more friendly. The exclamation point at the end of this sentence adds some casual friendliness to the letter and would likely humanize the author to the person who is reading this letter.</p><p><span class="popup-label">Notice</span>This is a subtle but intentional shift in tone. The rest of the letter is measured and professional, but ending with a small moment of warmth makes the author feel approachable \u2014 not just qualified, but someone you\u2019d want to work with.</p>'
   },
   appeals: {
     title: 'Rhetorical Appeals',
