@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rhetorical Analysis Handout — ENGL 1181</title>
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./style.css">
+<style>
+/* --- Expandable Cards --- */
+
+.card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.6em 0 1.2em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.card-item {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.card-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6em 0.9em;
+  background: var(--bg-alt);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--accent);
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.card-toggle:hover {
+  background: var(--accent-light);
+}
+
+.card-toggle::after {
+  content: '+';
+  font-size: 1.2em;
+  font-weight: 400;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-left: 0.5em;
+  transition: transform 0.2s;
+}
+
+.card-item.open .card-toggle::after {
+  content: '\2212';
+}
+
+.card-body {
+  display: none;
+  padding: 0.5em 0.9em 0.7em;
+  font-size: 0.95em;
+  border-top: 1px solid var(--border);
+}
+
+.card-item.open .card-body {
+  display: block;
+}
+
+.card-hint {
+  font-size: 0.82em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 0.5em;
+}
+
+/* --- Interactive Cover Letter --- */
+
+.interactive-intro {
+  margin-bottom: 0.5em;
+}
+
+.interactive-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 0.88em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.6em;
+}
+
+.interactive-hint .dot-icon {
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.letter-container {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 1.5em 1.8em;
+  margin: 0 0 1em 0;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-size: 0.92em;
+  line-height: 1.55;
+  max-width: 6.5in;
+}
+
+.letter-container p {
+  margin-bottom: 0.7em;
+}
+
+.annotation-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.7em;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  vertical-align: middle;
+  margin-left: 0.3em;
+  transition: transform 0.15s, background 0.15s;
+  position: relative;
+  z-index: 2;
+}
+
+.annotation-dot:hover {
+  transform: scale(1.15);
+  background: var(--accent-hover);
+}
+
+.annotation-dot:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+}
+
+/* --- Popup --- */
+
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.popup-overlay.visible {
+  display: flex;
+}
+
+.popup {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+  max-width: 480px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.popup-header {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.6em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.popup-header h3 {
+  margin: 0;
+  font-size: 1em;
+  color: #fff;
+}
+
+.popup-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.8);
+  font-size: 1.4em;
+  cursor: pointer;
+  padding: 0 0.2em;
+  line-height: 1;
+}
+
+.popup-close:hover {
+  color: #fff;
+}
+
+.popup-body {
+  padding: 0.8em 1em;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95em;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.popup-body p {
+  margin-bottom: 0.4em;
+}
+
+.popup-body p:last-child {
+  margin-bottom: 0;
+}
+
+.popup-label {
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.15em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .annotation-dot { transition: none; }
+}
+</style>
+</head>
+<body>
+<script src="./nav.js"></script>
+
+<main class="page" id="main-content">
+
+<h1>Rhetorical Analysis</h1>
+<p class="subtitle">ENGL 1181 — Handout</p>
+<hr class="header-line">
+
+<p>The rhetorical situation is the context that shapes any piece of writing: why it exists, who it's for, who wrote it, and what's going on around it. Use these questions to analyze the rhetorical situation of your genre samples. For a completed example, see the <a href="#example">interactive cover letter example</a> below.</p>
+
+<h2>Rhetorical Situation</h2>
+<p class="card-hint">Click a category to see the analysis questions.</p>
+
+<ul class="card-list">
+  <li class="card-item">
+    <button class="card-toggle" aria-expanded="false">Purpose</button>
+    <div class="card-body">
+      <p>What is the purpose of this text? Why was it written? What is it hoping to do?</p>
+    </div>
+  </li>
+  <li class="card-item">
+    <button class="card-toggle" aria-expanded="false">Audience</button>
+    <div class="card-body">
+      <p>Who is the audience? How can you tell? Is there a secondary audience? How does the author write to that audience?</p>
+    </div>
+  </li>
+  <li class="card-item">
+    <button class="card-toggle" aria-expanded="false">Author/Speaker</button>
+    <div class="card-body">
+      <p>Who is the author? Are they writing as themselves or representing a group/organization?</p>
+    </div>
+  </li>
+  <li class="card-item">
+    <button class="card-toggle" aria-expanded="false">Content</button>
+    <div class="card-body">
+      <p>What information is included? How detailed is it?</p>
+    </div>
+  </li>
+  <li class="card-item">
+    <button class="card-toggle" aria-expanded="false">Context</button>
+    <div class="card-body">
+      <p>Is there an event or background information around the event that is important to understand?</p>
+    </div>
+  </li>
+</ul>
+
+<h2 id="example">Example: Cover Letter</h2>
+
+<p class="interactive-intro">Below is a sample cover letter with annotations. Click the numbered dots to see how each part of the letter connects to the rhetorical situation.</p>
+
+<p class="interactive-hint"><span class="dot-icon">1</span> Click the dots to explore the analysis</p>
+
+<div class="letter-container">
+
+  <p>December 10, 2018</p>
+
+  <p>Ms. Susan Carey<br>
+  Senior Manager<br>
+  Wholesale Wine USA<br>
+  23 Green St.<br>
+  Boston, MA 02116 <button class="annotation-dot" data-popup="audience" aria-label="View Audience analysis">1</button></p>
+
+  <p>Dear Ms. Carey:</p>
+
+  <p>I'm writing to express my interest in the sales associate position at Wholesale Wine USA (listed on Crimson Careers), which I believe reports to you. <button class="annotation-dot" data-popup="purpose" aria-label="View Purpose analysis">2</button></p>
+
+  <p>Having worked in the industry for nearly eight years, I now have a deep love and appreciation for wine and cuisine. At Shay's Pub and Wine Bar, nothing made me happier than speaking with customers about the perfect wine to pair with their orders. The result was a 25% increase in sales and 30% increase in repeat customers.</p>
+
+  <p>My experience at Aspen's award-winning Montagna allowed me to expand upon my knowledge of wine, locally inspired cuisine and the highest standards of service. Our weekly blind-tastings fueled my desire to further myself in this field, and I'm currently in the process of acquiring certification through both the Court of Master Sommeliers and the Wine Spirit &amp; Education Trust. <button class="annotation-dot" data-popup="content" aria-label="View Content analysis">3</button></p>
+
+  <p>I also just returned from France, where I worked on an organic vineyard in Beaujolais and was able to shadow the vigneron who ran the estate, the largest of its kind in the region. As Wholesale Wine USA begins to expand into international markets, I'm confident that my knowledge of the French wine industry can help contribute to your company's growth and success. <button class="annotation-dot" data-popup="context" aria-label="View Context analysis">4</button></p>
+
+  <p>I've attached my resume and am readily available via phone or email. Please don't hesitate to reach out if you have any questions. Thank you for your consideration and I look forward to hearing back from you!</p>
+
+  <p>Sincerely,<br>
+  Georgina Santiago <button class="annotation-dot" data-popup="author" aria-label="View Author/Speaker analysis">5</button></p>
+
+</div>
+
+<!-- Popup overlay -->
+<div class="popup-overlay" id="popup-overlay">
+  <div class="popup">
+    <div class="popup-header">
+      <h3 id="popup-title"></h3>
+      <button class="popup-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="popup-body" id="popup-body"></div>
+  </div>
+</div>
+
+<footer class="footer-note"></footer>
+
+</main>
+<script src="./footer.js"></script>
+
+<script>
+// --- Expandable Cards ---
+document.querySelectorAll('.card-toggle').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = btn.closest('.card-item');
+    var isOpen = item.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+});
+
+// --- Interactive Cover Letter Popups ---
+var popupData = {
+  audience: {
+    title: 'Audience',
+    body: '<p>The audience is the hiring manager. It might also go to HR and a team in the company.</p><p><span class="popup-label">Notice</span>The recipient\u2019s name, title, company, and address are all included \u2014 the letter is addressed to a specific person, which tells us who the primary audience is. The secondary audience (HR, the broader team) isn\u2019t addressed directly, but the letter\u2019s professional tone and detailed credentials are written with them in mind too.</p>'
+  },
+  purpose: {
+    title: 'Purpose',
+    body: '<p>The purpose is to get an interview. The author wants the hiring manager to consider them for the position and call them for an interview (and hopefully get the job).</p><p><span class="popup-label">Notice</span>The very first sentence identifies the position and signals intent \u2014 the reader immediately knows why this letter exists.</p>'
+  },
+  content: {
+    title: 'Content',
+    body: '<p>The cover letter includes the position being applied to, the author\u2019s relevant experience, why they are good for the job, how to contact the author and who it is going to.</p><p><span class="popup-label">Notice</span>The body paragraphs focus on relevant experience and specific achievements. Everything included serves the purpose \u2014 there\u2019s no personal information that isn\u2019t connected to why she\u2019s qualified for this job.</p>'
+  },
+  context: {
+    title: 'Context',
+    body: '<p>The context is that this job was posted and is open.</p><p><span class="popup-label">Notice</span>The author connects her experience directly to the company\u2019s current situation (expanding into international markets). Understanding the context \u2014 what the company needs right now \u2014 shapes how she frames her qualifications.</p>'
+  },
+  author: {
+    title: 'Author/Speaker',
+    body: '<p>The author is the person who wants the job, speaking as a professional in the field.</p><p><span class="popup-label">Notice</span>Georgina writes as herself, but she\u2019s presenting a professional version of herself \u2014 her experience, credentials, and achievements. The signature formalizes this: she\u2019s an individual speaking on her own behalf, not representing an organization.</p>'
+  }
+};
+
+var overlay = document.getElementById('popup-overlay');
+var popupTitle = document.getElementById('popup-title');
+var popupBody = document.getElementById('popup-body');
+
+document.querySelectorAll('.annotation-dot').forEach(function(dot) {
+  dot.addEventListener('click', function() {
+    var key = dot.getAttribute('data-popup');
+    var data = popupData[key];
+    if (data) {
+      popupTitle.innerHTML = data.title;
+      popupBody.innerHTML = data.body;
+      overlay.classList.add('visible');
+    }
+  });
+});
+
+overlay.querySelector('.popup-close').addEventListener('click', function() {
+  overlay.classList.remove('visible');
+});
+
+overlay.addEventListener('click', function(e) {
+  if (e.target === overlay) {
+    overlay.classList.remove('visible');
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && overlay.classList.contains('visible')) {
+    overlay.classList.remove('visible');
+  }
+});
+</script>
+
+</body>
+</html>

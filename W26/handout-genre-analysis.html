@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genre Analysis Handout — ENGL 1181</title>
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./style.css">
+<style>
+/* --- Expandable Cards --- */
+
+.card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.6em 0 1.2em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.card-item {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.card-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6em 0.9em;
+  background: var(--bg-alt);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--accent);
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.card-toggle:hover {
+  background: var(--accent-light);
+}
+
+.card-toggle::after {
+  content: '+';
+  font-size: 1.2em;
+  font-weight: 400;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-left: 0.5em;
+  transition: transform 0.2s;
+}
+
+.card-item.open .card-toggle::after {
+  content: '\2212';
+}
+
+.card-body {
+  display: none;
+  padding: 0.5em 0.9em 0.7em;
+  font-size: 0.95em;
+  border-top: 1px solid var(--border);
+}
+
+.card-item.open .card-body {
+  display: block;
+}
+
+.card-hint {
+  font-size: 0.82em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 0.5em;
+}
+
+/* --- Interactive Cover Letter --- */
+
+.interactive-intro {
+  margin-bottom: 0.5em;
+}
+
+.interactive-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 0.88em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.6em;
+}
+
+.interactive-hint .dot-icon {
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.letter-container {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 1.5em 1.8em;
+  margin: 0 0 1em 0;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-size: 0.92em;
+  line-height: 1.55;
+  max-width: 6.5in;
+}
+
+.letter-container p {
+  margin-bottom: 0.7em;
+}
+
+.annotation-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.7em;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  vertical-align: middle;
+  margin-left: 0.3em;
+  transition: transform 0.15s, background 0.15s;
+  position: relative;
+  z-index: 2;
+}
+
+.annotation-dot:hover {
+  transform: scale(1.15);
+  background: var(--accent-hover);
+}
+
+.annotation-dot:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+}
+
+/* --- Popup --- */
+
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.popup-overlay.visible {
+  display: flex;
+}
+
+.popup {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+  max-width: 480px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.popup-header {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.6em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.popup-header h3 {
+  margin: 0;
+  font-size: 1em;
+  color: #fff;
+}
+
+.popup-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.8);
+  font-size: 1.4em;
+  cursor: pointer;
+  padding: 0 0.2em;
+  line-height: 1;
+}
+
+.popup-close:hover {
+  color: #fff;
+}
+
+.popup-body {
+  padding: 0.8em 1em;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95em;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.popup-body p {
+  margin-bottom: 0.4em;
+}
+
+.popup-body p:last-child {
+  margin-bottom: 0;
+}
+
+.popup-label {
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.15em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .annotation-dot { transition: none; }
+}
+</style>
+</head>
+<body>
+<script src="./nav.js"></script>
+
+<main class="page" id="main-content">
+
+<h1>Genre Analysis</h1>
+<p class="subtitle">ENGL 1181 — Handout</p>
+<hr class="header-line">
+
+<p>Genre conventions are the patterns and tendencies that define how a type of writing works — the features that show up consistently across multiple examples. Use these questions to identify the conventions of your genre. For a completed example, see the <a href="#example">interactive cover letter example</a> below.</p>
+
+<p>For rhetorical situation questions (purpose, audience, author, content, context), see the <a href="./handout-rhetorical-analysis.html">Rhetorical Analysis Handout</a>.</p>
+
+<h2>Conventions of the Genre</h2>
+<p class="card-hint">Click a category to see the analysis questions.</p>
+
+<ul class="card-list">
+  <li class="card-item">
+    <button class="card-toggle" aria-expanded="false">Writing Style &amp; Tone</button>
+    <div class="card-body">
+      <p>What do you notice about the writing in this genre? For example, is the tone:</p>
+      <ul class="strategy-list">
+        <li>conversational?</li>
+        <li>authoritative? detached?</li>
+        <li>informational? persuasive/argumentative?</li>
+        <li>logical? measured (i.e. thoughtful and unbiased)? inflammatory? (think: click-bait news article titles)</li>
+        <li>humorous? serious? contemplative?</li>
+      </ul>
+      <p>Does the author use "I," "we," "you," or keep things in third person? Does the text speak directly to the reader?</p>
+      <p>Is the style more direct and assertive (i.e. researchers found, this proves, etc.)? Does the author use hedging or clarifying words (i.e. this suggests, this may mean, etc...)</p>
+    </div>
+  </li>
+  <li class="card-item">
+    <button class="card-toggle" aria-expanded="false">Organization</button>
+    <div class="card-body">
+      <p>How is the information organized? What is the order the information is presented? (For example: Does it start with the first thing that happened and then go to the next? Is it summarized first and then explained?)</p>
+      <div class="callout">
+        <p><strong>Tip:</strong> Try a quick reverse outline to map the organization of a piece.</p>
+        <ol class="strategy-list">
+          <li>Go through paragraph by paragraph and write one short phrase describing what each paragraph does — not what it says, but its job (e.g., "introduces the problem," "gives a personal example," "provides data").</li>
+          <li>Then ask yourself: Do your genre samples all seem to follow the same order? Why might the ideas or information be presented in this order? Are there sections that every example of this genre seems to include? Which seem to be optional (or context-specific)?</li>
+        </ol>
+      </div>
+    </div>
+  </li>
+  <li class="card-item">
+    <button class="card-toggle" aria-expanded="false">Design and Layout</button>
+    <div class="card-body">
+      <p>How is the genre formatted? What kind of fonts are used? Are there images? If there are, how do they relate to the text and message? Are colors used? If so, how? Are there any other design elements? What impact does the design and layout have on the overall message?</p>
+    </div>
+  </li>
+  <li class="card-item">
+    <button class="card-toggle" aria-expanded="false">Rhetorical Appeals</button>
+    <div class="card-body">
+      <p>For genres that are persuasive: how does the author use ethos, pathos and logos to appeal to the audience? Most persuasive texts blend all three — look for which one seems to dominate and why that might suit the genre.</p>
+      <p><strong>Ethos:</strong> an appeal to the credibility, experience, or authority of the author</p>
+      <ul class="strategy-list">
+        <li>Citing professional credentials or years of experience ("As a pediatrician with 20 years of practice...")</li>
+        <li>Referencing respected sources or institutions</li>
+        <li>Acknowledging counterarguments or limitations, which builds trust through honesty</li>
+      </ul>
+      <p><strong>Pathos:</strong> an appeal to emotion</p>
+      <ul class="strategy-list">
+        <li>Telling a personal story or anecdote to make the reader feel connected to the issue</li>
+        <li>Using vivid, sensory language that puts the reader "in the scene"</li>
+        <li>Choosing words with strong emotional connotations ("devastating" vs. "unfortunate," "thriving" vs. "doing well")</li>
+        <li>Including images, testimonials, or case studies that humanize a problem</li>
+      </ul>
+      <p><strong>Logos:</strong> an appeal to logic</p>
+      <ul class="strategy-list">
+        <li>Presenting statistics, data, or research findings as evidence</li>
+        <li>Walking the reader through a cause-and-effect chain</li>
+        <li>Using comparisons or analogies to make a complex argument easier to follow</li>
+        <li>Structuring the argument in a clear, step-by-step progression where each point builds on the last</li>
+      </ul>
+      <div class="callout">
+        <p><strong>Feeling stuck?</strong> Sometimes, it can be just as helpful to look at what a genre <em>isn't</em> doing and/or to compare it to another genre. For example, what do text messages do that this genre doesn't? Or how is this genre different than an academic essay? Then use that as a starting place to figure out what the genre <em>is</em> doing.</p>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<h2 id="example">Example: Cover Letter</h2>
+
+<p class="interactive-intro">Below is a sample cover letter with annotations. Click the numbered dots to see how each part of the letter connects to the genre's conventions.</p>
+
+<p class="interactive-hint"><span class="dot-icon">1</span> Click the dots to explore the analysis</p>
+
+<div class="letter-container">
+
+  <p>December 10, 2018 <button class="annotation-dot" data-popup="design" aria-label="View Design and Layout analysis">1</button></p>
+
+  <p>Ms. Susan Carey<br>
+  Senior Manager<br>
+  Wholesale Wine USA<br>
+  23 Green St.<br>
+  Boston, MA 02116</p>
+
+  <p>Dear Ms. Carey: <button class="annotation-dot" data-popup="conventions" aria-label="View Conventions analysis">2</button></p>
+
+  <p>I'm writing to express my interest in the sales associate position at Wholesale Wine USA (listed on Crimson Careers), which I believe reports to you. <button class="annotation-dot" data-popup="organization" aria-label="View Organization analysis">3</button></p>
+
+  <p>Having worked in the industry for nearly eight years, I now have a deep love and appreciation for wine and cuisine. At Shay's Pub and Wine Bar, nothing made me happier than speaking with customers about the perfect wine to pair with their orders. The result was a 25% increase in sales and 30% increase in repeat customers.</p>
+
+  <p>My experience at Aspen's award-winning Montagna allowed me to expand upon my knowledge of wine, locally inspired cuisine and the highest standards of service. Our weekly blind-tastings fueled my desire to further myself in this field, and I'm currently in the process of acquiring certification through both the Court of Master Sommeliers and the Wine Spirit &amp; Education Trust. <button class="annotation-dot" data-popup="appeals" aria-label="View Rhetorical Appeals analysis">4</button></p>
+
+  <p>I also just returned from France, where I worked on an organic vineyard in Beaujolais and was able to shadow the vigneron who ran the estate, the largest of its kind in the region. As Wholesale Wine USA begins to expand into international markets, I'm confident that my knowledge of the French wine industry can help contribute to your company's growth and success.</p>
+
+  <p>I've attached my resume and am readily available via phone or email. Please don't hesitate to reach out if you have any questions. Thank you for your consideration and I look forward to hearing back from you!</p>
+
+  <p>Sincerely,<br>
+  Georgina Santiago</p>
+
+</div>
+
+<!-- Popup overlay -->
+<div class="popup-overlay" id="popup-overlay">
+  <div class="popup">
+    <div class="popup-header">
+      <h3 id="popup-title"></h3>
+      <button class="popup-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="popup-body" id="popup-body"></div>
+  </div>
+</div>
+
+<footer class="footer-note"></footer>
+
+</main>
+<script src="./footer.js"></script>
+
+<script>
+// --- Expandable Cards ---
+document.querySelectorAll('.card-toggle').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = btn.closest('.card-item');
+    var isOpen = item.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+});
+
+// --- Interactive Cover Letter Popups ---
+var popupData = {
+  design: {
+    title: 'Design and Layout',
+    body: '<p>The letter is left aligned, single spaced with a space between each paragraph. The font is a formal font (like Times New Roman) and black. There is no color and are no graphics. It\u2019s plain but professional. The design feels serious.</p><p><span class="popup-label">Notice</span>The date and recipient information are positioned at the upper left \u2014 this is a standard convention of formal business letters. The overall look is clean and unadorned, which reinforces the professional tone.</p>'
+  },
+  conventions: {
+    title: 'Trends and Tendencies',
+    body: '<p>The format is very professional. It includes the date and recipient information on the upper left. There\u2019s a greeting and a signature. It is written in first person with a formal tone.</p><p><span class="popup-label">Notice</span>The greeting uses the recipient\u2019s title and last name (\u201cDear Ms. Carey\u201d) \u2014 this is a convention of the genre. Cover letters almost always open with a formal salutation and close with a formal sign-off. These framing elements signal professionalism and respect.</p>'
+  },
+  organization: {
+    title: 'Organization',
+    body: '<p>The first paragraph includes the job being applied for. The next paragraph includes more broad explanation of experience, and the next two go into specifics of experience that is relevant. The final paragraph includes contact information and a thank you.</p><p><span class="popup-label">Notice</span>The letter moves from general to specific: it opens by naming the job, then provides broad experience, then detailed evidence. This is a pattern you\u2019ll see across cover letters \u2014 the organization serves the purpose by front-loading the most important information.</p>'
+  },
+  appeals: {
+    title: 'Rhetorical Appeals',
+    body: '<p>The author uses logos and ethos to appeal to the hiring manager. She includes detailed evidence (facts/logos) to support the experience she has and achievements that make her a good candidate. The professional tone and language supports her ethos and makes her seem credible and professional. Additionally, the organization of the letter is very logical and supports both the logos and her credibility (ethos).</p><p><span class="popup-label">Notice</span>Specific numbers (25% increase in sales, 30% increase in repeat customers) and named credentials (Court of Master Sommeliers) serve as concrete evidence \u2014 this is logos at work. The formal tone and structure build ethos throughout.</p>'
+  }
+};
+
+var overlay = document.getElementById('popup-overlay');
+var popupTitle = document.getElementById('popup-title');
+var popupBody = document.getElementById('popup-body');
+
+document.querySelectorAll('.annotation-dot').forEach(function(dot) {
+  dot.addEventListener('click', function() {
+    var key = dot.getAttribute('data-popup');
+    var data = popupData[key];
+    if (data) {
+      popupTitle.innerHTML = data.title;
+      popupBody.innerHTML = data.body;
+      overlay.classList.add('visible');
+    }
+  });
+});
+
+overlay.querySelector('.popup-close').addEventListener('click', function() {
+  overlay.classList.remove('visible');
+});
+
+overlay.addEventListener('click', function(e) {
+  if (e.target === overlay) {
+    overlay.classList.remove('visible');
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && overlay.classList.contains('visible')) {
+    overlay.classList.remove('visible');
+  }
+});
+</script>
+
+</body>
+</html>

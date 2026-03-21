@@ -561,6 +561,20 @@ a { color: var(--accent); }
   text-align: center;
 }
 
+.footer-note p {
+  margin-bottom: 0.3em;
+}
+
+.footer-note p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-license,
+.footer-ai {
+  font-size: 0.9em;
+  color: var(--text-muted);
+}
+
 /* --- Focus Visible --- */
 
 a:focus-visible,
