@@ -506,6 +506,50 @@ a { color: var(--accent); }
   font-size: 1.1em;
 }
 
+/* --- Reading Pages --- */
+
+.reading-byline {
+  font-style: italic;
+  color: var(--text-light);
+  margin-bottom: 1em;
+}
+
+.reading-note {
+  font-size: 0.9em;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.endnotes {
+  font-size: 0.9em;
+  color: var(--text-light);
+  padding-left: 1.5em;
+  margin: 0.5em 0 1em 0;
+}
+
+.endnotes li {
+  margin-bottom: 0.8em;
+}
+
+.reference {
+  padding-left: 2em;
+  text-indent: -2em;
+  margin-bottom: 0.5em;
+}
+
+.license-box {
+  margin-top: 1.5em;
+  padding: 0.7em 1em;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--text-light);
+}
+
+.license-box p { margin-bottom: 0.3em; }
+.license-box p:last-child { margin-bottom: 0; }
+
 /* --- Footer --- */
 
 .footer-note {
