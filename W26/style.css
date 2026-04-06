@@ -575,6 +575,42 @@ a { color: var(--accent); }
   color: var(--text-muted);
 }
 
+/* --- Accordions --- */
+
+details {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin: .5rem 0;
+  background: var(--bg-alt);
+}
+
+details summary {
+  padding: .6rem .9rem;
+  font-weight: 600;
+  font-size: .95em;
+  cursor: pointer;
+  color: var(--text);
+  list-style: none;
+}
+
+details summary::-webkit-details-marker { display: none; }
+
+details summary::before {
+  content: "\25B6";
+  display: inline-block;
+  margin-right: .5rem;
+  font-size: .7rem;
+  transition: transform .2s ease;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details .details-content {
+  padding: 0 .9rem .75rem;
+}
+
 /* --- Focus Visible --- */
 
 a:focus-visible,
