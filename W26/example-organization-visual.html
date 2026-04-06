@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual Outline | ENGL 1181 Independent Study</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    .hourglass {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      margin: 1.5rem 0 2rem 0;
+    }
+    .hourglass-block {
+      padding: 0.5rem 1rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #fff;
+      border-radius: 6px;
+    }
+    .hourglass-arrow { color: var(--text-muted); font-size: 1rem; line-height: 1; }
+    .hg-broad { background: var(--accent); width: 100%; max-width: 450px; }
+    .hg-mid { background: #3a7a94; width: 70%; max-width: 320px; }
+    .hg-narrow { background: #5a9ab0; width: 50%; max-width: 250px; }
+
+    .outline-card {
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    .outline-card h3 { margin-top: 0; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; }
+    .outline-card ul, .outline-card ol { margin-top: 0.5rem; }
+    .outline-card li { margin-bottom: 0.3rem; }
+    .card-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .card-intro { background: #dfeaf5; border-left: 6px solid #2c5f8a; }
+    .card-intro h3 { color: #2c5f8a; }
+    .card-intro .card-num { background: #2c5f8a; color: #fff; }
+    .card-body { background: #e6f4ea; border-left: 6px solid #2d7a3a; }
+    .card-body h3 { color: #2d7a3a; }
+    .card-body .card-num { background: #2d7a3a; color: #fff; }
+    .card-convention { background: #fef3e0; border-left: 6px solid #b8710a; }
+    .card-convention h3 { color: #8a5a08; }
+    .card-convention .card-num { background: #b8710a; color: #fff; }
+    .card-function { background: #f3e8fd; border-left: 6px solid #6b3fa0; }
+    .card-function h3 { color: #6b3fa0; }
+    .card-function .card-num { background: #6b3fa0; color: #fff; }
+    .card-conclusion { background: #dfeaf5; border-left: 6px solid #2c5f8a; }
+    .card-conclusion h3 { color: #2c5f8a; }
+    .card-conclusion .card-num { background: #2c5f8a; color: #fff; }
+    .card-connector { width: 3px; height: 1.25rem; background: var(--border); margin: 0 auto; }
+    .inline-note {
+      background: rgba(255,255,255,0.6);
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
+    .option-chip {
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(107,63,160,0.3);
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+    }
+    .option-chip strong { display: block; margin-bottom: 0.2rem; color: #6b3fa0; font-size: 0.9rem; }
+    .option-chip p { margin: 0; font-size: 0.85rem; color: var(--text); }
+    .intro-options { display: flex; gap: 1rem; margin-top: 0.75rem; }
+    @media (max-width: 600px) { .intro-options { flex-direction: column; } }
+    .intro-option {
+      flex: 1;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(44,95,138,0.3);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+    }
+    .intro-option strong { display: block; margin-bottom: 0.3rem; color: #2c5f8a; }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+  <script src="genre-nav.js"></script>
+
+  <main class="page" id="main-content">
+
+    <h1>Example Essay Organization</h1>
+    <p>This is a <mark style="background:#fff3a8; padding:0.1em 0.3em; border-radius:3px;">flexible framework</mark> &mdash; all of these sections are required, but the order and length can be adapted to fit your genre. Some sections may be longer than shown here.</p>
+
+    <h2>The Hourglass Shape</h2>
+    <p>Your essay works best with a <strong>broad &rarr; narrow &rarr; broad</strong> structure:</p>
+
+    <div class="hourglass">
+      <div class="hourglass-block hg-broad">Broad: Professional field &amp; genre intro</div>
+      <div class="hourglass-arrow">&#9660;</div>
+      <div class="hourglass-block hg-mid">Narrower: Purpose &amp; audience</div>
+      <div class="hourglass-arrow">&#9660;</div>
+      <div class="hourglass-block hg-narrow">Narrowest: Convention analysis</div>
+      <div class="hourglass-arrow">&#9660;</div>
+      <div class="hourglass-block hg-mid">Broader: Genre function in practice</div>
+      <div class="hourglass-arrow">&#9660;</div>
+      <div class="hourglass-block hg-broad">Broad: Conclusion</div>
+    </div>
+
+    <h2>Example Outline</h2>
+
+    <!-- INTRO -->
+    <div class="outline-card card-intro">
+      <h3><span class="card-num">1</span> Introduction (1&ndash;2 paragraphs)</h3>
+      <p>Introduce the professional field and the genre you will analyze.</p>
+      <div class="intro-options">
+        <div class="intro-option">
+          <strong>Option A: Two paragraphs</strong>
+          <p><strong>Paragraph 1:</strong> Introduce the paralegal/legal field and the types of writing that happen in it.</p>
+          <p><strong>Paragraph 2:</strong> Narrow to IRAC briefs specifically. State that this is the focus of your essay (this is your thesis).</p>
+        </div>
+        <div class="intro-option">
+          <strong>Option B: One paragraph</strong>
+          <p>Combine the field overview and genre intro into one paragraph. Best if the professional context doesn't need a lot of setup.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-connector"></div>
+
+    <!-- GENRE DESCRIPTION -->
+    <div class="outline-card card-body">
+      <h3><span class="card-num">2</span> Genre Description, Purpose, &amp; Audience (1&ndash;3 paragraphs)</h3>
+      <ul>
+        <li>Provide an overview and description of the genre.</li>
+        <li>Discuss the <strong>purpose</strong> &mdash; why this genre exists in legal practice.</li>
+        <li>Analyze the <strong>audience</strong> and how they shape the genre.</li>
+      </ul>
+      <div class="inline-note">
+        These can be one paragraph or 2&ndash;3, depending on how much you have to say. The description should come early, but purpose and audience could also work later in the paper.
+      </div>
+    </div>
+
+    <div class="card-connector"></div>
+
+    <!-- CONVENTION 1 -->
+    <div class="outline-card card-convention">
+      <h3><span class="card-num">3</span> Convention #1 (1 paragraph)</h3>
+      <ul>
+        <li>Pick one convention (common feature) to analyze.</li>
+        <li>Describe it and use <strong>evidence from your samples</strong> to support your point.</li>
+        <li>Analyze how it makes the genre effective for its purpose.</li>
+      </ul>
+    </div>
+
+    <div class="card-connector"></div>
+
+    <!-- CONVENTION 2 -->
+    <div class="outline-card card-convention">
+      <h3><span class="card-num">4</span> Convention #2 (1 paragraph)</h3>
+      <ul>
+        <li>Pick another convention to analyze.</li>
+        <li>Describe it and use evidence from your samples.</li>
+        <li>Analyze its effectiveness.</li>
+      </ul>
+    </div>
+
+    <div class="card-connector"></div>
+
+    <!-- CONVENTION 3 -->
+    <div class="outline-card card-convention">
+      <h3><span class="card-num">5</span> Convention #3 (1 paragraph)</h3>
+      <ul>
+        <li>Pick a third convention to analyze.</li>
+        <li>Describe it and use evidence from your samples.</li>
+        <li>Analyze its effectiveness.</li>
+      </ul>
+      <div class="inline-note">
+        Three conventions is the minimum. If you notice a fourth convention worth analyzing, add another paragraph &mdash; you are not limited to three.
+      </div>
+    </div>
+
+    <div class="card-connector"></div>
+
+    <!-- FUNCTION -->
+    <div class="outline-card card-function">
+      <h3><span class="card-num">6</span> How the Genre Functions in Professional Practice (1&ndash;2 paragraphs)</h3>
+      <p>Pick one or two of the following approaches, or come up with your own:</p>
+      <div class="options-grid">
+        <div class="option-chip">
+          <strong>Professional Values</strong>
+          <p>What does this genre reveal about what the legal field values? How does its structure reflect those values?</p>
+        </div>
+        <div class="option-chip">
+          <strong>Professional Communication</strong>
+          <p>How does this genre connect to other writing in legal practice? What role does it play in a larger workflow?</p>
+        </div>
+        <div class="option-chip">
+          <strong>Breaking Conventions</strong>
+          <p>What would happen if someone didn't follow these conventions? What does that tell you?</p>
+        </div>
+        <div class="option-chip">
+          <strong>Something Else</strong>
+          <p>If you have another angle on how the genre functions in the field, go for it.</p>
+        </div>
+      </div>
+      <div class="inline-note">
+        You don't need to cover all of these. Pick what makes sense for your genre.
+      </div>
+    </div>
+
+    <div class="card-connector"></div>
+
+    <!-- CONCLUSION -->
+    <div class="outline-card card-conclusion">
+      <h3><span class="card-num">7</span> Conclusion (1 paragraph)</h3>
+      <ul>
+        <li>Summarize your key findings from the analysis.</li>
+        <li>Restate how the genre contributes to the goals and functioning of professional legal practice.</li>
+      </ul>
+    </div>
+
+  </main>
+  <script src="footer.js" defer></script>
+</body>
+</html>

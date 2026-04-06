@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example Essay Organization | ENGL 1181 Independent Study</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    .glance-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    .glance-row {
+      display: flex;
+      align-items: stretch;
+      min-height: 3rem;
+    }
+    .glance-label {
+      width: 140px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fff;
+      text-align: center;
+      padding: 0.5rem 0.4rem;
+    }
+    .glance-content {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border, #ddd);
+    }
+    .glance-content p { margin: 0; }
+    .gl-intro .glance-label { background: #2c5f8a; }
+    .gl-intro .glance-content { background: #e8f0fe; }
+    .gl-body .glance-label { background: #2d7a3a; }
+    .gl-body .glance-content { background: #e6f4ea; }
+    .gl-conv .glance-label { background: #b8710a; }
+    .gl-conv .glance-content { background: #fef3e0; font-size: 0.9rem; }
+    .gl-func .glance-label { background: #6b3fa0; }
+    .gl-func .glance-content { background: #f3e8fd; }
+    .gl-conc .glance-label { background: #2c5f8a; }
+    .gl-conc .glance-content { background: #e8f0fe; }
+    .glance-row:first-child .glance-label { border-radius: 8px 0 0 0; }
+    .glance-row:first-child .glance-content { border-radius: 0 8px 0 0; }
+    .glance-row:last-child .glance-label { border-radius: 0 0 0 8px; }
+    .glance-row:last-child .glance-content { border-radius: 0 0 8px 0; border-bottom: none; }
+    .detail-links {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) {
+      .detail-links { flex-direction: column; }
+      .glance-label { width: 100px; font-size: 0.7rem; }
+    }
+    .detail-link {
+      flex: 1;
+      display: block;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--border, #ddd);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text, #1a1a1a);
+      transition: border-color 0.2s ease;
+    }
+    .detail-link:hover { border-color: var(--accent, #2c5f7c); }
+    .detail-link strong { display: block; margin-bottom: 0.3rem; color: var(--accent, #2c5f7c); }
+    .detail-link p { margin: 0; font-size: 0.9rem; color: var(--text-muted, #555); }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+  <script src="genre-nav.js"></script>
+
+  <main class="page" id="main-content">
+
+    <h1>Example Essay Organization</h1>
+    <p>Here is the full essay structure in one view. Each row is a section of your paper. This is a <mark style="background:#fff3a8; padding:0.1em 0.3em; border-radius:3px;">flexible framework</mark> &mdash; all of these sections are required, but some may be longer than shown here (e.g., more convention paragraphs, a two-paragraph intro, or a longer genre function section).</p>
+
+    <div class="glance-grid">
+      <div class="glance-row gl-intro">
+        <div class="glance-label">Intro</div>
+        <div class="glance-content"><p>Introduce the professional context and the genre you will analyze. State that your essay focuses on IRAC briefs.</p></div>
+      </div>
+      <div class="glance-row gl-body">
+        <div class="glance-label">Genre Description</div>
+        <div class="glance-content"><p>Describe the genre. Explain its <strong>purpose</strong> (why it exists) and <strong>audience</strong> (who it's for).</p></div>
+      </div>
+      <div class="glance-row gl-conv">
+        <div class="glance-label">Convention 1</div>
+        <div class="glance-content"><p>Name one common feature. Show examples from your samples. Explain why it matters.</p></div>
+      </div>
+      <div class="glance-row gl-conv">
+        <div class="glance-label">Convention 2</div>
+        <div class="glance-content"><p>Name a second common feature. Show examples. Explain why it matters.</p></div>
+      </div>
+      <div class="glance-row gl-conv">
+        <div class="glance-label">Convention 3</div>
+        <div class="glance-content"><p>Name a third common feature. Show examples. Explain why it matters.</p></div>
+      </div>
+      <div class="glance-row gl-func">
+        <div class="glance-label">Genre Function</div>
+        <div class="glance-content"><p>How does this genre support legal practice? What does it reveal about the field's values?</p></div>
+      </div>
+      <div class="glance-row gl-conc">
+        <div class="glance-label">Conclusion</div>
+        <div class="glance-content"><p>Summarize your findings. Restate how this genre functions in professional practice.</p></div>
+      </div>
+    </div>
+
+    <h2>Want More Detail?</h2>
+    <p>These guides break down each section with tips, examples, and options:</p>
+
+    <div class="detail-links">
+      <a href="example-organization-detailed.html" class="detail-link">
+        <strong>Detailed Outline</strong>
+        <p>Step-by-step breakdown of each section with notes and options for how to organize your intro, body, and conclusion.</p>
+      </a>
+      <a href="example-organization-visual.html" class="detail-link">
+        <strong>Visual Outline</strong>
+        <p>Color-coded, card-based view of the essay structure with an hourglass diagram and numbered sections.</p>
+      </a>
+    </div>
+
+  </main>
+  <script src="footer.js" defer></script>
+</body>
+</html>
