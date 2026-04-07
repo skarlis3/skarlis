@@ -1,7 +1,8 @@
 // genre-nav.js — Sidebar navigation for Genre Analysis Essay pages
 // Include on any page that should show the genre analysis sidebar nav.
+// Load with: <script src="genre-nav.js" defer></script>
 
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   const pages = [
     { label: 'Essay Assignment', href: './genre-analysis-essay.html' },
     { label: 'Example Organization', href: './example-organization.html' },
@@ -50,4 +51,4 @@
     wrapper.appendChild(aside);
     wrapper.appendChild(main);
   }
-})();
+});

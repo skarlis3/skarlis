@@ -4,7 +4,7 @@
 (function() {
   const navItems = [
     { label: 'Home',               href: './' },
-    { label: 'Weekly Assignments', href: './assignments.html' },
+    { label: 'Assignments', href: './assignments.html' },
     { label: 'Calendar',          href: './calendar.html' },
   ];
 
