@@ -5,6 +5,7 @@
   const navItems = [
     { label: 'Home',               href: './' },
     { label: 'Assignments', href: './assignments.html' },
+    { label: 'Readings & Resources', href: './readings.html' },
     { label: 'Calendar',          href: './calendar.html' },
   ];
 
