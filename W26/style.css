@@ -611,6 +611,11 @@ details .details-content {
   padding: 0 .9rem .75rem;
 }
 
+details .details-content ul,
+details .details-content ol {
+  padding-left: 1.25rem;
+}
+
 /* --- Genre Analysis Sidebar Layout --- */
 
 .genre-layout {
