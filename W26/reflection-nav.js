@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     { label: 'Overview', href: './final-reflection.html' },
     { label: 'Readings & Videos', href: './reflection-readings.html' },
     { label: 'Reflection Prompts', href: './reflection-prompts.html' },
+    { label: 'Grading', href: './reflection-grading.html' },
     { label: 'Submission', href: './reflection-submission.html' },
   ];
 
